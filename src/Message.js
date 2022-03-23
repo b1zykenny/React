@@ -1,11 +1,10 @@
-import React from "react";
-
-const Message = ({ text }) => {
+const Message = ({ message }) => {
     return (
-        <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            <h1 className="Msg">Hello, {text}!</h1>
+        <div className="message">
+            <p> {message.author}</p>
+            <blockquote>{message.textMessage}</blockquote>
         </div>
     );
-}
+};
 
 export default Message;
