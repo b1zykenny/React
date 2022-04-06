@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg: #2c2c32;
+    --color-active: #0f7dc6;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: aliceblue;
+}
+
+header {
+    background-color: var(--color-bg);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+header>a {
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
+}
+
+header>a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.container {
+    max-width: 900px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0 auto;
+}
+
+main {
+    min-height: calc(100vh - 85px - 22px);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+main a {
+    text-decoration: none;
+    color: var(--color-bg);
+}
+
+main a:hover {
+    text-decoration: underline;
+}
+
+.active-link {
+    color: lightblue;
+    cursor: default;
+}
+
+.ListLink {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1670px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+    background-color: rgb(134, 187, 233);
+    border-bottom-right-radius: 10px;
+}
+
+.PageLinks {
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+}

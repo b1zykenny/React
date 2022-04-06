@@ -1,50 +1,27 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
-import Message from "./Message";
-import "./message.scss";
-import AlignItemsList from "./AlignItemsList";
+import { Routes, Route, Link, NavLink } from 'react-router-dom'
+import './index.scss';
+import Layout from "./pages/Layout";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import Profile from "./pages/Profile";
+import Messages from "./pages/Messages";
+import Message from "./pages/Message";
 
 
 function App() {
-  const [messages, setMessage] = useState([]);
-
-  const createMessage = (newMessage) => {
-    setMessage([...messages, newMessage]);
-  };
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      let lastMsg = messages[messages.length - 1];
-      let robotMsg = {
-        id: Date.now(),
-        author: "NameBot",
-        textMessage:
-          "Hello, " +
-          lastMsg.author +
-          ". Please, wait for instructions.",
-      };
-      if (lastMsg.author !== "NameBot") {
-        setTimeout(() => {
-          setMessage([...messages, robotMsg]);
-        }, 1500);
-      }
-    }
-  }, [messages]);
 
   return (
-    <div className="App">
-      <AlignItemsList />
-      <header>
-        <div className="App-header">
-          {messages.map((message) => (
-            <Message message={message} key={message.id} />
-          ))}
-        </div>
-      </header>
-      <Form create={createMessage} />
-    </div>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={< HomePage />} />
+        <Route path='/profile' element={< Profile />} />
+        <Route path='/messages' element={< Messages />} />
+        <Route path='/messages/:id' element={< Message />} />
+        <Route path='*' element={< NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 
 }
-
 export default App;
