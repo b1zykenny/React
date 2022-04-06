@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./form.scss";
+import { Button } from "@mui/material";
+import SendIcon from "@material-ui/icons/Send";
+import TextField from '@mui/material/TextField';
 
 const Form = ({ create }) => {
     const [message, setMessage] = useState({
@@ -20,11 +23,12 @@ const Form = ({ create }) => {
         }, 1);
         setMessage({ author: message.author, textMessage: "" });
     };
+
     return (
         <div className="wrap">
             <form className="form">
                 <div className="form-control">
-                    <input
+                    <TextField autoFocus
                         onChange={(e) => setMessage({ ...message, author: e.target.value })}
                         type="text"
                         placeholder="YourName"
@@ -32,7 +36,7 @@ const Form = ({ create }) => {
                     />
                 </div>
                 <div className="form-control">
-                    <textarea
+                    <TextField
                         onChange={(e) =>
                             setMessage({ ...message, textMessage: e.target.value })
                         }
@@ -41,7 +45,7 @@ const Form = ({ create }) => {
                     />
                 </div>
                 <div className="msg-btn">
-                    <button onClick={addNewMessage}>Send</button>
+                    <Button variant="contained" endIcon={<SendIcon />} onClick={addNewMessage}></Button>
                 </div>
             </form>
         </div>

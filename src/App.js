@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Form from "./Form";
 import Message from "./Message";
 import "./message.scss";
+import AlignItemsList from "./AlignItemsList";
+
 
 function App() {
   const [messages, setMessage] = useState([]);
@@ -31,6 +33,7 @@ function App() {
 
   return (
     <div className="App">
+      <AlignItemsList />
       <header>
         <div className="App-header">
           {messages.map((message) => (
@@ -41,6 +44,7 @@ function App() {
       <Form create={createMessage} />
     </div>
   );
+
 }
 
 export default App;
