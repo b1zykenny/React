@@ -68,15 +68,14 @@ main a:hover {
 .ListLink {
     display: flex;
     flex-direction: column;
-    margin-right: 1670px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 50px;
-    background-color: rgb(134, 187, 233);
     border-bottom-right-radius: 10px;
+    text-align: center;
 }
 
 .PageLinks {
+    margin: auto;
     text-decoration: none;
     padding: 10px;
     color: black;
