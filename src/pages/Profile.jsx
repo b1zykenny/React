@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 
 
 function Profile() {
-    const contacts = useSelector((state) => {
-        return state.contacts
+    const messages = useSelector((state) => {
+        return state.messages
     })
 
     const isActive = useSelector(state => {
@@ -13,9 +13,9 @@ function Profile() {
     return (
         <div>
             Профиль пользователя
-            {contacts.map((contact) => (
-                <li key={contact.name}>
-                    {contact.name}
+            {messages.map((message) => (
+                <li key={message.name}>
+                    {message.name}
                 </li>
             ))}
             <input type='checkbox' checked={isActive} />

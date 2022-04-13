@@ -2,36 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { store } from './redux/configureStore'
 
-const initialState = {
-  contacts: [
-    {
-      name: 'Andrey'
-    },
-
-    {
-      name: 'Gleb'
-    },
-
-    {
-      name: 'Michail'
-    }
-  ],
-  isActive: false
-}
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'addContact':
-      return '';
-    default:
-      return state
-  }
-}
-
-const store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>

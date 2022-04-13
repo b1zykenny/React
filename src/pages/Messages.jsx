@@ -1,108 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-/* import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import '../index.scss';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-/* const dialogs = [
-{ id: 1, name: xyz },
-{ id: 2, name: abc },
-{ id: 3, name: asd }
-];
-*/
+function Messages() {
+    const messages = useSelector(state => state.messages)
 
-export default function AlignItemsList() {
-    const [messages, setMessages] = useState([])
+    const dispatch = useDispatch();
 
-    useEffect(effect => {
-        fetch('https://jsonplaceholder.typicode.com/comments')
-            .then(res => res.json())
-            .then(data => setMessages(data))
-    })
+    const deleteMessage = (id) => {
+        dispatch({ type: 'deleteMessage', payload: id })
+    }
+
+    const addMessage = (name) => {
+        const obj = {
+            name,
+            id: Date.now()
+        }
+        dispatch({ type: 'addMessage', payload: obj })
+    }
 
     return (
-        <div className="Messages">
-            {
-                messages.map(message => (
-                    <Link style={{ display: 'block', fontSize: '15px', marginLeft: '10px' }} key={message.id} to={`/messages/${message.id}`}>
-                        {message.id}
+        <article>
+            <h2>Dialogs</h2>
+            {messages.map((messages) => (
+                <div className='Dialogs'>
+                    <Link className='PageLinks' to={`/message/${messages.id}`} key={messages.id}>
+                        {messages.name}
                     </Link>
-                ))
-                /* messages.map(message => (
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'rgb(134, 187, 233)', borderBottomRightRadius: 10 }} key={message.id} to={`/messages/${message.id}`}>
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            Ali Connors
-                                        </Typography>
-                                        {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Summer BBQ"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            to Scott, Alex, Jennifer
-                                        </Typography>
-                                        {" — Wish I could come, but I'm out of town this…"}
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Oui Oui"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            Sandra Adams
-                                        </Typography>
-                                        {' — Do you have Paris recommendations? Have you ever…'}
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                    </List>
-                )) */
-            }
-        </div>
+                    <DeleteIcon aria-label="delete" onClick={() => deleteMessage(messages.id)} />
+                </div>
+            ))}
+            <Button variant="outlined" onClick={() => addMessage(prompt())}>Add Dialog</Button>
+        </article>
     );
 }
+
+export default Messages;
+
 
