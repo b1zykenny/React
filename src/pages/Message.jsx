@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState, useSelector } from 'react-redux';
 
-const Message = () => {
-    const { id } = useParams()
 
-    const [message, setMessage] = useState(null)
-
-    useEffect(effect => {
-        fetch(`https://jsonplaceholder.typicode.com/comments/${id}`)
-            .then(res => res.json())
-            .then(data => setMessage(data))
-    }, [id])
-
+function Message() {
+    const messages = useSelector((state) => {
+        return state.messages
+    })
 
     return (
         <div>
-            {message && (
-                <>
-                    <h2>{message.name}</h2>
-                    <p>{message.body}</p>
-                </>
-            )}
+            Dialog
+            {messages.map((message) => (
+                <li key={message.name}>
+                    {message.name}
+                </li>
+            ))}
         </div>
     );
-};
+}
 
 export default Message;
