@@ -1,27 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link, NavLink } from 'react-router-dom'
-import './index.scss';
-import Layout from "./pages/Layout";
-import HomePage from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import Profile from "./pages/Profile";
-import Messages from "./pages/Messages";
-import Message from "./pages/Message";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { usersSelector } from "./redux/reducers/postsSelector/selector";
+import { loadUsers } from "./redux/reducers/reducer";
 
 
 function App() {
+  const dispatch = useDispatch();
+  const users = useSelector(usersSelector);
+  const loading = useSelector(state => state.users.loading);
+
+  useEffect(() => {
+    dispatch(loadUsers())
+  }, [])
+
+  if (loading) {
+    return (
+      < div >
+        loading...
+      </div >
+    )
+  }
+
 
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={< HomePage />} />
-        <Route path='/profile' element={< Profile />} />
-        <Route path='/messages' element={< Messages />} />
-        <Route path='/messages/:id' element={< Message />} />
-        <Route path='*' element={< NotFoundPage />} />
-      </Route>
-    </Routes>
+    <div>
+      {
+        loading ? (
+          <div>
+            Loading...
+          </div>) : (
+          users.map((user) => (
+            <h4>
+              {user.id}
+              <h5>
+                {user.name}
+                <h6>
+                  {user.email}
+                </h6>
+              </h5>
+            </h4>
+          ))
+        )
+      }
+    </div>
   );
-
 }
+
 export default App;
